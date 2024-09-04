@@ -3,22 +3,18 @@
  * @return {number}
  */
 var majorityElement = function (nums) {
-    const elementCount = new Map()
+    let count = 0
+    let element = 0
 
     for (let i = 0; i < nums.length; i++) {
-
-        if(elementCount.has(nums[i])){
-            elementCount.set(nums[i],elementCount.get(nums[i]) + 1)
-        }else{
-            elementCount.set(nums[i], 1)
+        if (count == 0) {
+            element = nums[i]
         }
-
-    if(elementCount.get(nums[i])> nums.length/2){
-        return nums[i]
+        if (nums[i] == element) {
+            count++
+        } else {
+            count--
+        }
     }
-
-    }
-
-
-
+    return element
 };
