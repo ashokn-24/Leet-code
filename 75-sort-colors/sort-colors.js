@@ -3,37 +3,28 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var sortColors = function (nums) {
-    let zero = 0
-    let one = 0
-    let two = 0
+    let n = nums.length;
+    let low = 0;
+    let mid = 0;
+    let high = n - 1;
 
-    if (nums.length <= 1) return nums;
+    while (mid <= high) {
+        if (nums[mid] == 0) {
+            let temp = nums[mid]
+            nums[mid] = nums[low]
+            nums[low] = temp
 
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] === 0) zero++;
-        if (nums[i] === 1) one++;
-        if (nums[i] === 2) two++;
+            low++;
+            mid++
+        } else if (nums[mid] == 1) {
+            mid++;
+        } else if (nums[mid] == 2) {
+            let temp = nums[mid]
+            nums[mid] = nums[high]
+            nums[high] = temp
+
+            high--;
+        }
     }
-
-
-    for (let i = 0; i < zero; i++) {
-        nums[i] = 0;
-    }
-
-
-
-
-    for (let i = zero; i < zero + one; i++) {
-        nums[i] = 1;
-    }
-
-
-
-    for (let i = zero + one; i < nums.length; i++) {
-        nums[i] = 2;
-    }
-
-
-
     return nums
 };
