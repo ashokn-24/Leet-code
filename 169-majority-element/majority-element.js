@@ -2,19 +2,28 @@
  * @param {number[]} nums
  * @return {number}
  */
-var majorityElement = function (nums) {
-    let count = 0
-    let element = 0
+var majorityElement = function (a) {
+    let count = 0;
+    let mp = new Map()
 
-    for (let i = 0; i < nums.length; i++) {
-        if (count == 0) {
-            element = nums[i]
+
+
+    for (let i = 0; i < a.length; i++) {
+        if (mp.has(a[i])) {
+            mp.set(a[i], mp.get(a[i]) + 1)
         }
-        if (nums[i] == element) {
-            count++
-        } else {
-            count--
+
+        if (!mp.has(a[i])) {
+            mp.set(a[i], 1)
+        }
+
+    }
+
+    for (const [key, value] of mp) {
+        if (value > a.length / 2) {
+            count = key
         }
     }
-    return element
+
+    return count;
 };
