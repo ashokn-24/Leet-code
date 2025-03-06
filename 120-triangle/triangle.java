@@ -21,9 +21,18 @@ class Solution {
 
     int[][] dp = new int[n][n];
 
-    for (int[] row : dp) {
-      Arrays.fill(row, -1);
+    for (int j = 0; j < n; j++) {
+      dp[n - 1][j] = triangle.get(n - 1).get(j);
     }
-    return f(0, 0, triangle, dp);
+
+    for (int row = n - 2; row >= 0; row--) {
+      for (int col = row; col >= 0; col--) {
+          int down = triangle.get(row).get(col) + dp[row + 1][col];
+          int dRht = triangle.get(row).get(col) + dp[row + 1][col + 1];
+          dp[row][col] = Math.min(down, dRht);
+      }
+    }
+
+    return dp[0][0];
   }
 }
