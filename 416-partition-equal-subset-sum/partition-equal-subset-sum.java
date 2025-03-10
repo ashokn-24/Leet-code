@@ -35,28 +35,30 @@ class Solution {
     }
 
     int k = s / 2;
-    boolean[][] dp = new boolean[n][k + 1];
 
-    for (int i = 0; i < n; i++) {
-      dp[i][0] = true;
-    }
+    boolean[] prev = new boolean[k + 1];
+    boolean[] curr = new boolean[k + 1];
+
+    prev[0] = true;
+    curr[0] = true;
 
     if (nums[0] <= k) {
-      dp[0][nums[0]] = true;
+     prev[nums[0]] = true;
     }
     for (int ind = 1; ind < n; ind++) {
       for (int tar = 1; tar <= k; tar++) {
-        boolean notTake = dp[ind - 1][tar];
+        boolean notTake = prev[tar];
         boolean take = false;
 
         if (nums[ind] <= tar) {
-          take = dp[ind - 1][tar - nums[ind]];
+          take = prev[tar - nums[ind]];
         }
 
-        dp[ind][tar] = take || notTake;
+        curr[tar] = take || notTake;
       }
+      prev = Arrays.copyOf(curr, k + 1);
     }
 
-    return dp[n - 1][k];
+    return prev[k];
   }
 }
