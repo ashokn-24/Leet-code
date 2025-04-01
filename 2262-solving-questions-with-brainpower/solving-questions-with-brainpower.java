@@ -16,9 +16,23 @@ class Solution {
 
     public long mostPoints(int[][] qus) {
         int n = qus.length;
-        long[] dp = new long[n];
-        Arrays.fill(dp, -1);
+        long[] dp = new long[n + 1];
 
-        return f(0, qus, dp);
+        dp[n] = 0;
+
+        for (int i = n - 1; i >= 0; i--) {
+            long skip = dp[i + 1];
+            int brainPt = i + qus[i][1] + 1;
+
+            if (brainPt > n) {
+                brainPt = 0;
+            }
+
+            long solve = qus[i][0] + dp[brainPt];
+
+            dp[i] = Math.max(skip, solve);
+        }
+
+        return dp[0];
     }
 }
