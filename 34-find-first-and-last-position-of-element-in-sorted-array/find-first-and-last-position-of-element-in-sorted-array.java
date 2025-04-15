@@ -1,5 +1,6 @@
 class Solution {
 
+  // it is normal lower bound (first occurance)
   int first(int[] arr, int target) {
     int low = 0;
     int high = arr.length - 1;
@@ -20,6 +21,7 @@ class Solution {
     return ans;
   }
 
+  // it normal binary search to find last occurance
   int last(int[] arr, int target) {
     int low = 0;
     int high = arr.length - 1;
