@@ -1,3 +1,4 @@
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -14,22 +15,25 @@
  * }
  */
 class Solution {
-
-    public void inorder(TreeNode root,List<Integer> arr){
-        if(root == null){
-            return;
-        }
-
-        inorder(root.left,arr);
-        arr.add(root.val);
-        inorder(root.right,arr);
+  void inorder(TreeNode node, List<Integer> res) {
+    if (node == null) {
+      return;
     }
 
-    public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> arr = new ArrayList<>();
+    if (node.left != null)
+      inorder(node.left, res);
 
-        inorder(root,arr);
+    res.add(node.val);
 
-        return arr;
-    }
+    if (node.right != null)
+      inorder(node.right, res);
+  }
+
+  public List<Integer> inorderTraversal(TreeNode root) {
+    List<Integer> res = new ArrayList<>();
+
+    inorder(root, res);
+
+    return res;
+  }
 }
