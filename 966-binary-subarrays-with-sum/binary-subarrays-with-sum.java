@@ -8,10 +8,11 @@ class Solution {
     int sum = 0;
 
     for (int right = 0; right < nums.length; right++) {
-      sum += nums[right];
+      // treat as 0's and 1's for use module by 2
+      sum += (nums[right] % 2);
 
       while (sum > goal) {
-        sum -= nums[left];
+        sum -= (nums[left] % 2);
         left++;
       }
 
