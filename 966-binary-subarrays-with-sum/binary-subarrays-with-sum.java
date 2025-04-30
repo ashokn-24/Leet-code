@@ -1,29 +1,30 @@
 class Solution {
-    public int check(int[] nums, int k) {
-        if (k < 0) return 0; 
+  int check(int[] nums, int goal) {
+    if (goal < 0)
+      return 0;
 
-        int left = 0;
-        int right = 0;
-        int count = 0;
-        int sum = 0;
+    int left = 0;
+    int subArrayCnt = 0;
+    int sum = 0;
 
-        while (right < nums.length) {   
-            sum += nums[right];
+    for (int right = 0; right < nums.length; right++) {
+      sum += nums[right];
 
-            while (sum > k) {
-                sum -= nums[left];
-                left++;
-            }
-            count += right - left + 1;
-            right++;
-        }
+      while (sum > goal) {
+        sum -= nums[left];
+        left++;
+      }
 
-        return count;
+      subArrayCnt += right - left + 1;
     }
 
-    public int numSubarraysWithSum(int[] nums, int k) {
-        int a = check(nums, k);
-        int b = check(nums, k - 1);
-        return a - b;
-    }
+    return subArrayCnt;
+  }
+
+  public int numSubarraysWithSum(int[] nums, int goal) {
+    int a = check(nums, goal);
+    int b = check(nums, goal - 1);
+
+    return a - b;
+  }
 }
